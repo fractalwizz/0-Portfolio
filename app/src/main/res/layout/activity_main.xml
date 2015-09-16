@@ -18,7 +18,7 @@
 
     <Button style="@style/button"
         android:text="@string/project1"
-        android:id="@+id/spotify_btn"
+        android:id="@+id/movie_btn"
         android:onClick="onClick" />
 
     <Button style="@style/button"

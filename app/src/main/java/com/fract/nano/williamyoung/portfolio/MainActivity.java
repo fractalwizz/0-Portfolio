@@ -1,8 +1,11 @@
 package com.fract.nano.williamyoung.portfolio;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,23 +48,33 @@ public class MainActivity extends ActionBarActivity {
         String notif = "";
         switch (view.getId())
         {
-            case R.id.spotify_btn:
-                notif = "Spotify Streamer";
+            case R.id.movie_btn:
+                notif = "com.fract.nano.williamyoung.popularmovies";
                 break;
             case R.id.scores_btn:
-                notif = "Scores App";
+                //notif = "Scores App";
                 break;
             case R.id.library_btn:
-                notif = "Library App";
+                //notif = "Library App";
                 break;
             case R.id.xyz_btn:
-                notif = "XYZ Reader";
+                //notif = "XYZ Reader";
                 break;
             case R.id.capstone_btn:
-                notif = "Capstone Project";
+                //notif = "Capstone Project";
                 break;
         }
 
-        Toast.makeText(context, notif + " will launch", Toast.LENGTH_SHORT).show();
+        Intent i;
+        PackageManager manager = getPackageManager();
+        try {
+            i = manager.getLaunchIntentForPackage(notif);
+            if (i == null)
+                throw new PackageManager.NameNotFoundException();
+            i.addCategory(Intent.CATEGORY_LAUNCHER);
+            startActivity(i);
+        } catch (PackageManager.NameNotFoundException e) { Log.e("PackageManager", e.getMessage()); }
+
+        //Toast.makeText(context, notif + " will launch", Toast.LENGTH_SHORT).show();
     }
 }
